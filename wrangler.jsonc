@@ -1,0 +1,8 @@
+{
+  "name": "vrchat-ai-explainer",
+  "compatibility_date": "2026-10-01",
+  // Static-only: no Worker script, Cloudflare serves the files directly.
+  "assets": {
+    "directory": "."
+  }
+}

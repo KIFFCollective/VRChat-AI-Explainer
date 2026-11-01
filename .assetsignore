@@ -1,0 +1,7 @@
+# Files in the repo root that must not be served as static assets
+.git
+.github
+.wrangler
+node_modules
+wrangler.jsonc
+.assetsignore
