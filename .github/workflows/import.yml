@@ -7,9 +7,11 @@ jobs:
   import:
     runs-on: ubuntu-latest
     steps:
-      - name: fetch and push
+      - name: fetch, verify, push
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HTML_SHA: c119c1f70f31f048c3370366fa853826f4b03ab3
+          DATA_SHA: aefee910f1dee81e2f8964a748036e8a25f47e96
         run: |
           set -euo pipefail
           base=https://coworkers.richard-fox-241.workers.dev/apps/richard-fox-ahref-co-uk/8c8a91b7/vrchat-survey/7bd8ccd141614db4a1db6d41fe7b8324
@@ -18,6 +20,11 @@ jobs:
           curl -fsSL "$base/index.html" -o index.html
           curl -fsSL "$base/data.js" -o data.js
           sed -i 's|<meta name="coworkers-version"[^>]*>||' index.html
+          grep -q '^<head>$' index.html || sed -i 's|^<html lang="en">$|<html lang="en">\n<head>|' index.html
+          echo "index.html: $(wc -c < index.html) bytes, $(git hash-object index.html)"
+          echo "data.js: $(wc -c < data.js) bytes, $(git hash-object data.js)"
+          [ "$(git hash-object index.html)" = "$HTML_SHA" ] || { echo 'index.html does not match the expected file'; exit 1; }
+          [ "$(git hash-object data.js)" = "$DATA_SHA" ] || { echo 'data.js does not match the expected file'; exit 1; }
           git config user.name 'Troll Bot'
           git config user.email 'bot@users.noreply.github.com'
           git add index.html data.js
