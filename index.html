@@ -83,7 +83,14 @@
   .sw{width:10px;height:10px;border-radius:3px;flex:0 0 auto}
 
   /* ---------- dot grid ---------- */
-  .dots{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;max-width:300px}
+  .dots{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;flex:0 0 190px}
+  .schemes{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .sside{flex:1 1 160px;display:flex;flex-direction:column;gap:14px}
+  .skey{display:flex;flex-direction:column;gap:10px;font-size:13px;color:var(--muted)}
+  .skey>span{display:flex;align-items:flex-start;gap:8px;line-height:1.45}
+  .skey .sw{margin-top:4px}
+  .skey b{color:var(--ink);white-space:nowrap}
+  .snote{color:#6f6f88;font-size:11.5px;line-height:1.5;margin:0}
   .dots i{aspect-ratio:1;border-radius:50%;background:#22222f;display:block}
   .dots i.on{background:var(--pink);box-shadow:0 0 10px rgba(255,77,125,.65)}
 
@@ -205,12 +212,14 @@
       <div style="height:1px;background:var(--line);margin:22px 0"></div>
 
       <div class="ct">...and how many schemes they proposed</div>
-      <div class="donutwrap" style="align-items:flex-start">
-        <div class="dots" id="dotgrid"></div>
-        <div class="dkey" style="max-width:150px">
-          <span><i class="sw" style="background:var(--pink)"></i>biggest single scheme: <b class="mono" style="color:#ececf4">under 10%</b></span>
-          <span><i class="sw" style="background:#22222f"></i>the other <b class="mono" style="color:#ececf4">3,140</b> schemes</span>
-          <span style="color:#6f6f88;font-size:11.5px;line-height:1.45">Schematic: one square per percentage point of respondents.</span>
+      <div class="schemes">
+        <div class="dots" id="dotgrid" role="img" aria-label="Schematic: 9 of 100 dots highlighted"></div>
+        <div class="sside">
+        <div class="skey">
+          <span><i class="sw" style="background:var(--pink)"></i><span>biggest single scheme: <b class="mono">under 10%</b></span></span>
+          <span><i class="sw" style="background:#22222f;outline:1px solid #34344a"></i><span>the other <b class="mono">3,140</b> schemes</span></span>
+        </div>
+        <p class="snote">Schematic: one dot per percentage point of respondents.</p>
         </div>
       </div>
     </div>
