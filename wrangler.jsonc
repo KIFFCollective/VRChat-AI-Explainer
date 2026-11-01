@@ -4,5 +4,8 @@
   // Static-only: no Worker script, Cloudflare serves the files directly.
   "assets": {
     "directory": "."
-  }
+  },
+  "routes": [
+    { "pattern": "vrchatai.troupe.nexus", "custom_domain": true }
+  ]
 }
