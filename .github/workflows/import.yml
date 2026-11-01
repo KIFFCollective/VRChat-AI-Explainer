@@ -13,13 +13,13 @@ jobs:
         run: |
           set -euo pipefail
           base=https://coworkers.richard-fox-241.workers.dev/apps/richard-fox-ahref-co-uk/8c8a91b7/vrchat-survey/7bd8ccd141614db4a1db6d41fe7b8324
+          git clone --depth 1 "https://x-access-token:$GH_TOKEN@github.com/${{ github.repository }}.git" site
+          cd site
           curl -fsSL "$base/index.html" -o index.html
           curl -fsSL "$base/data.js" -o data.js
           sed -i '/coworkers-version/d' index.html
-          git init -b main
           git config user.name 'Troll Bot'
           git config user.email 'bot@users.noreply.github.com'
-          git add -A
+          git add index.html data.js
           git commit -m 'Add the VRChat survey analysis page'
-          git remote add origin "https://x-access-token:$GH_TOKEN@github.com/${{ github.repository }}.git"
-          git push -u origin main
+          git push origin HEAD:main
